@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:bussola_app/Screens/pageEpisode.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 
 class CardEp {
   final String urlImage;
@@ -22,6 +23,8 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   RefreshController _controller = RefreshController();
+  final dataString =
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas posuere ut nisi sed elementum. Quisque vel pulvinar justo. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Curabitur eu aliquam risus. Fusce pulvinar orci augue, sed sagittis massa cursus vitae. Nulla porta tincidunt quam non convallis. In interdum sapien eleifend purus ullamcorper, eget aliquam est iaculis. Curabitur est risus, dignissim vitae felis eu, hendrerit posuere sapien. Proin vitae euismod ipsum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nam interdum, massa eu sollicitudin pulvinar, mauris ligula porttitor erat, a accumsan mauris lorem ac sapien.';
   int itemsCount = 4;
   List<CardEp> items = [
     CardEp(
@@ -67,7 +70,7 @@ class _HomeState extends State<Home> {
     }
   }
 
-  void _onRefresh() {
+  void _onRefresh() async {
     Future.delayed(const Duration(seconds: 2))
         .then((value) => _controller.refreshCompleted());
   }
@@ -98,15 +101,41 @@ class _HomeState extends State<Home> {
   }
 
   Widget _createHome() {
-    return Stack(
-      children: [
-        Column(
-          children: [
-            _cardLastEpis(),
-            _ContainerEpisodios(),
+    return SingleChildScrollView(
+      child: Stack(
+        children: [
+          Column(
+            children: [
+              _cardLastEpis(),
+              // _menu(),
+              _containerEpisodios(),
+              _gradeMovies(),
+            ],
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget _menu() {
+    return Container(
+      height: 20,
+      child: Scaffold(
+        bottomNavigationBar: CurvedNavigationBar(
+          animationCurve: Curves.linear,
+          backgroundColor: Colors.transparent,
+          items: <Widget>[
+            Icon(Icons.home_filled, size: 20),
+            Icon(Icons.live_tv_outlined, size: 20),
+            Icon(Icons.chat_bubble_outlined, size: 20),
+            Icon(Icons.star, size: 20),
+            Icon(Icons.access_time_filled, size: 20),
           ],
-        )
-      ],
+          onTap: (index) {
+            //Handle button tap
+          },
+        ),
+      ),
     );
   }
 
@@ -117,13 +146,14 @@ class _HomeState extends State<Home> {
           margin: EdgeInsets.only(top: 20),
           constraints: BoxConstraints.expand(height: 170),
           child: Card(
+            margin: EdgeInsets.zero,
             semanticContainer: true,
             clipBehavior: Clip.antiAliasWithSaveLayer,
             elevation: 0,
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(25),
-              topRight: Radius.circular(25),
+              topLeft: Radius.circular(15),
+              topRight: Radius.circular(15),
             )),
             color: Colors.blueAccent,
             child: Container(
@@ -179,11 +209,12 @@ class _HomeState extends State<Home> {
                 ),
               ],
             )),
+        Container(padding: EdgeInsets.only(top: 200), child: _menu())
       ],
     );
   }
 
-  Widget _ContainerEpisodios() {
+  Widget _containerEpisodios() {
     return Container(
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Padding(
@@ -302,4 +333,124 @@ class _HomeState extends State<Home> {
           ),
         ),
       );
+
+  Widget _gradeMovies() {
+    return Container(
+        height: 260,
+        width: double.infinity,
+        child: Padding(
+            padding: EdgeInsets.all(10),
+            child: Card(
+                color: Color(0xFFFFFFFF),
+                elevation: 6,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(25))),
+                child: Row(
+                  children: [
+                    Container(
+                      margin: EdgeInsets.all(10),
+                      width: 120,
+                      height: 200,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
+                        image: DecorationImage(
+                            image: NetworkImage(
+                                'https://sm.ign.com/ign_br/screenshot/default/doutor-estranho-multiverso-loucura_jmqu.jpg'),
+                            fit: BoxFit.cover),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(top: 10),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              Container(
+                                width: 100,
+                                child: RichText(
+                                  overflow: TextOverflow.ellipsis,
+                                  text: TextSpan(
+                                      style: DefaultTextStyle.of(context).style,
+                                      children: <TextSpan>[
+                                        TextSpan(
+                                          text: 'Dr Estranho\n',
+                                          style: GoogleFonts.raleway(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold,
+                                              color: Color(0xFF000000)),
+                                        ),
+                                        TextSpan(
+                                          text: 'no Multiverso da Loucura',
+                                          style: GoogleFonts.raleway(
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.bold,
+                                              color: Color(0xFF000000)),
+                                        )
+                                      ]),
+                                ),
+                              ),
+                              Padding(
+                                  padding: EdgeInsets.only(left: 18),
+                                  child: Text('9.5/10',
+                                      style: GoogleFonts.raleway(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold))),
+                            ],
+                          ),
+                          Padding(
+                              padding: EdgeInsets.only(top: 12),
+                              child: Text('Avaliação',
+                                  style: GoogleFonts.raleway(fontSize: 12))),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              RatingBar.builder(
+                                  minRating: 1,
+                                  itemSize: 25,
+                                  itemBuilder: (context, _) =>
+                                      Icon(Icons.star, color: Colors.amber),
+                                  onRatingUpdate: (rating) {}),
+                              ElevatedButton(
+                                onPressed: () {},
+                                child: Text('Votar'),
+                                style: ElevatedButton.styleFrom(
+                                    minimumSize: Size(110, 25),
+                                    padding: EdgeInsets.zero,
+                                    primary: Color(0xFF33CC99)),
+                              )
+                            ],
+                          ),
+                          Container(
+                            width: 160,
+                            height: 90,
+                            margin: EdgeInsets.zero,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                Text(
+                                  dataString,
+                                  style: TextStyle(fontSize: 12),
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 3,
+                                ),
+                                TextButton(
+                                    style: TextButton.styleFrom(
+                                        padding: EdgeInsets.zero,
+                                        minimumSize: Size(3, 2),
+                                        primary: Color(0xFF33CC99)),
+                                    onPressed: () {},
+                                    child: Text(
+                                      'Ler Mais',
+                                      style: TextStyle(fontSize: 12),
+                                    ))
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ],
+                ))));
+  }
 }
