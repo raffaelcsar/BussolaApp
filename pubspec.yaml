@@ -70,6 +70,13 @@ flutter:
     - assets/Logo.svg
     - assets/icon.png
     - assets/logo_full.png
+    # icons
+    - assets/icons/CriticaMais.png
+    - assets/icons/Especial.png
+    - assets/icons/Nostalgia.png
+    - assets/icons/Padrao.png
+    - assets/icons/Talk.png
+     
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

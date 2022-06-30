@@ -119,24 +119,105 @@ class _HomeState extends State<Home> {
 
   Widget _menu() {
     return Container(
-      height: 20,
-      child: Scaffold(
-        bottomNavigationBar: CurvedNavigationBar(
-          animationCurve: Curves.linear,
-          backgroundColor: Colors.transparent,
-          items: <Widget>[
-            Icon(Icons.home_filled, size: 20),
-            Icon(Icons.live_tv_outlined, size: 20),
-            Icon(Icons.chat_bubble_outlined, size: 20),
-            Icon(Icons.star, size: 20),
-            Icon(Icons.access_time_filled, size: 20),
+        height: 50,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(10.0),
+              bottomRight: Radius.circular(10.0)),
+          boxShadow: <BoxShadow>[
+            BoxShadow(
+                color: Colors.black54,
+                blurRadius: 5.0,
+                offset: Offset(0.0, 0.20))
           ],
-          onTap: (index) {
-            //Handle button tap
-          },
         ),
-      ),
-    );
+        child: Center(
+          child: Row(
+            children: [
+              Padding(
+                padding: EdgeInsets.only(left: 5, right: 5),
+                child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      onPrimary: Colors.black,
+                      primary: Colors.white,
+                      shape: StadiumBorder(),
+                    ),
+                    child: Image(
+                      image: AssetImage("assets/icons/Padrao.png"),
+                      width: 30.0,
+                      height: 30.0,
+                      color: null,
+                    ),
+                    onPressed: () {}),
+              ),
+              Padding(
+                padding: EdgeInsets.only(left: 5, right: 5),
+                child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      onPrimary: Colors.black,
+                      primary: Colors.white,
+                      shape: StadiumBorder(),
+                    ),
+                    child: Image(
+                      image: AssetImage("assets/icons/CriticaMais.png"),
+                      width: 30.0,
+                      height: 30.0,
+                      color: null,
+                    ),
+                    onPressed: () {}),
+              ),
+              Padding(
+                padding: EdgeInsets.only(left: 5, right: 5),
+                child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      onPrimary: Colors.black,
+                      primary: Colors.white,
+                      shape: StadiumBorder(),
+                    ),
+                    child: Image(
+                      image: AssetImage("assets/icons/Talk.png"),
+                      width: 30.0,
+                      height: 30.0,
+                      color: null,
+                    ),
+                    onPressed: () {}),
+              ),
+              Padding(
+                padding: EdgeInsets.only(left: 10, right: 10),
+                child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      onPrimary: Colors.black,
+                      primary: Colors.white,
+                      shape: StadiumBorder(),
+                    ),
+                    child: Image(
+                      image: AssetImage("assets/icons/Nostalgia.png"),
+                      width: 30.0,
+                      height: 30.0,
+                      color: null,
+                    ),
+                    onPressed: () {}),
+              ),
+              Padding(
+                padding: EdgeInsets.only(left: 5, right: 5),
+                child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      onPrimary: Colors.black,
+                      primary: Colors.white,
+                      shape: StadiumBorder(),
+                    ),
+                    child: Image(
+                      image: AssetImage("assets/icons/Especial.png"),
+                      width: 30.0,
+                      height: 30.0,
+                      color: null,
+                    ),
+                    onPressed: () {}),
+              ),
+            ],
+          ),
+        ));
   }
 
   Widget _cardLastEpis() {
@@ -209,7 +290,7 @@ class _HomeState extends State<Home> {
                 ),
               ],
             )),
-        Container(padding: EdgeInsets.only(top: 200), child: _menu())
+        Container(padding: EdgeInsets.only(top: 160), child: _menu())
       ],
     );
   }
