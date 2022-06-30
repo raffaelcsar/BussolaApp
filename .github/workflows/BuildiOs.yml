@@ -1,0 +1,23 @@
+
+name: Flutter build iOs
+
+on:
+  push:
+    branches: [ "development" ]
+  pull_request:
+    branches: [ "main" ]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: subosito/flutter-action@v2
+      with:
+        flutter-version: '2.10.4'
+        architecture: x64
+    - run: flutter pub get
+    - run: flutter test
+    - run: flutter build ios --release --no-codesign
